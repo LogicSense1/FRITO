@@ -32,7 +32,7 @@ pip install -e 'git+https://github.com/kkoutini/sacred@v0.0.1#egg=sacred'
 ```
 
 # Getting started 
-Each dataset has an experiment file such as `ex_audioset.py` and `ex_openmic.py` and a dataset folder with a readme file.
+Each dataset has an experiment file such as `ex_dcase20.py` and `ex_nsynth.py` and a dataset folder with a readme file.
 In general, you can prob the experiment file for help:
 ```shell
 python ex_dcase20.py help
