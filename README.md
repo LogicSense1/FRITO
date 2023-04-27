@@ -64,8 +64,18 @@ python ex_dcase20.py with models.net.rf_norm_t=high_low trainer.use_tensorboard_
 Multi-gpu training can be enabled by setting the environment variable `DDP`, for example with 2 gpus:
 
 ```shell
-DDP=2 CUDA_VISIBLE_DEVICES=0,1 python ex_nsynth.py with models.net.rf_norm_t=high_low_branch trainer.use_tensorboard_logger=True -p --debug
+DDP=2 CUDA_VISIBLE_DEVICES=0,1 python ex_dcase20.py with models.net.rf_norm_t=high_low_branch trainer.use_tensorboard_logger=True -p --debug
 ```
+
+# Training on nsynth
+Download and prepare the dataset as explained in the [nsynth]([https://dcase.community/challenge2020/index](https://magenta.tensorflow.org/datasets/nsynth))
+The base FRITO model can be trained for example like this:
+```bash
+python ex_nsynth.py with models.net.rf_norm_t=high_low trainer.use_tensorboard_logger=True -p --debug
+```
+
+# models.net.rf_norm_t
+r is the size of a row cluster with r rows of internally visible patches, which can be set as `models.net.rf_norm_t=sparse_row_{r}`; v is the overlap factor, indicating the number of row clusters sparse_row high_low_branch attn_penalty
 
 # Contact
 The repo will be updated, in the mean time if you have any questions or problems feel free to open an issue on GitHub, or contact the authors directly.
