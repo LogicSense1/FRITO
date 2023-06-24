@@ -55,11 +55,12 @@ In short:
  - `models.mel` are the preprocessing options (mel spectrograms).
 
 # Training on dcase20
-Download and prepare the dataset as explained in the [TAU2020](https://dcase.community/challenge2020/index)
-The base FRITO model can be trained for example like this:
-```bash
-python ex_dcase20.py with models.net.rf_norm_t=high_low trainer.use_tensorboard_logger=True -p --debug
+Download and prepare the dataset as explained in the [TAU2020](https://dcase.community/challenge2020/index).
+The base FRITO model can be trained using:
+```shell
+python ex_dcase20_dev.py with models.net.rf_norm_t=row_overlap_8 use_mixup=True mixup_alpha=0.3 trainer.use_tensorboard_logger=True -p --debug
 ```
+where `models.net.rf_norm_t` can be set to `row_overlap_{v}` or `per_row_{r}`, which corresponds to the overlap factor $v$ and row cluster size $r$ in the paper, respectively.
 
 Multi-gpu training can be enabled by setting the environment variable `DDP`, for example with 2 gpus:
 
@@ -68,14 +69,26 @@ DDP=2 CUDA_VISIBLE_DEVICES=0,1 python ex_dcase20.py with models.net.rf_norm_t=hi
 ```
 
 # Training on nsynth
-Download and prepare the dataset as explained in the [nsynth]([https://dcase.community/challenge2020/index](https://magenta.tensorflow.org/datasets/nsynth))
-The base FRITO model can be trained for example like this:
-```bash
+Download and prepare the dataset as explained in the [nsynth]([https://dcase.community/challenge2020/index](https://magenta.tensorflow.org/datasets/nsynth)).
+The base FRITO model can be trained using:
+
+```shell
 python ex_nsynth.py with models.net.rf_norm_t=high_low trainer.use_tensorboard_logger=True -p --debug
 ```
 
-# models.net.rf_norm_t
-r is the size of a row cluster with r rows of internally visible patches, which can be set as `models.net.rf_norm_t=sparse_row_{r}`; v is the overlap factor, indicating the number of row clusters sparse_row high_low_branch attn_penalty
+which is equivalent to:
+
+```shell
+python ex_nsynth.py with models.net.rf_norm_t=per_row_6 trainer.use_tensorboard_logger=True -p --debug
+```
+
+where `models.net.rf_norm_t` can be set to `row_overlap_{v}` or `per_row_{r}`, which corresponds to overlap factor $v$ and row cluster size $r$ in the paper, respectively.
+
+# Sparse Attention
+Specifically, we implement `models.net.rf_norm_t=sparse_row_{r}` as the sparse version of `models.net.rf_norm_t=per_row_{r}`.
+```shell
+python ex_nsynth.py with models.net.rf_norm_t=sparse_row_6 trainer.use_tensorboard_logger=True -p --debug
+```
 
 # Contact
 The repo will be updated, in the mean time if you have any questions or problems feel free to open an issue on GitHub, or contact the authors directly.
