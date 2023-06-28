@@ -4,13 +4,15 @@ This is the implementation for [Improving Domain Generalization for Sound Classi
 
 We propose FRITO, an effective regularization technique on Transformer's self-attention, to improve the model's generalization ability by limiting each sequence position's attention receptive field along the frequency dimension on the spectrogram. Experiments show that our method helps Transformer models achieve SOTA generalization performance on TAU 2020 and Nsynth datasets while saving 20% inference time.
 
-<div style="text-align: center;">
+<p align="center">
   <img src="figs/method.png" width="600">
-</div>
+</p>
 
 Our scheme includes local and global attention, similar to the efficient transformers. This method differs from previous work in that it restricts the receptive field along the frequency dimension, aiming to improve the model's generalization ability instead of dealing with long sequences.
 
-![Local Frequency Attent a](figs/attn1.png)      ![Local Frequency Attent b](figs/attn2.png)
+<p align="center">
+  <img src="figs/attn1.png"> <img src="figs/attn2.png">
+</p>
 
 # Setting up the experiments environment
 This repo uses forked versions of sacred for configuration and logging, and pytorch-lightning for training.
